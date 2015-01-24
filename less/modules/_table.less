@@ -1,0 +1,93 @@
+table{
+	font-size: 14px;
+	width: 100%;
+	border-collapse: collapse;
+	background-color: @light;
+	color: @dark;
+	border: none;
+	
+	a{
+		color: @dark;
+		
+		&:hover{
+			color: @dark;
+		}
+	}
+	
+	&.border{
+		border-radius: 3px;
+		border: 1px solid lighten(@dark, 5%);
+		overflow: hidden;
+		
+		& tbody{
+			border: 1px solid darken(@light, 20%);
+			
+		}
+		
+		& thead{
+			border: 1px solid lighten(@dark, 5%);				
+		}
+		
+
+		
+		& tbody td{
+			padding: 5px 10px;			
+		}
+		& thead td{
+			padding: 10px 15px;			
+		}
+		&.divider tbody td{
+			border-right: 1px solid darken(@light, 20%);
+			
+			&:last-of-type{
+				border-right: none;
+			}
+			
+		}
+		
+		&.divider thead td{
+			border-right: 1px solid lighten(@dark, 5%);
+			
+			&:last-of-type{
+				border-right: none;
+			}
+		}
+		
+		&.divider tr{
+			border-bottom: 1px solid darken(@light, 20%);
+			
+			&:last-of-type{
+				border-bottom: none;
+			}
+			
+		}
+		
+		&.even tr:nth-last-of-type(even) {
+			background-color: darken(@light, 3%);
+		}	
+		
+		&.hover tbody tr:hover{
+			background-color: darken(@light, 5%);
+		}
+		
+		
+		&.hover.even tr:hover:nth-last-of-type(even){
+			background-color: darken(@light, 10%);
+		}
+	}
+		
+	& thead{
+		font-weight: bold;
+		background-color: @dark;
+		color: @light;
+		border: 1px solid lighten(@dark, 5%);
+		
+		& a{
+			color: @light;
+			
+			&:hover{
+				color: @main;
+			}
+		}
+	}
+}

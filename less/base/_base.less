@@ -1,0 +1,194 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	outline: none;
+	box-sizing: border-box;
+}
+
+
+body{
+	background-color: @light;
+	color: @dark;
+	font-family: 'open sans', sans-serif;
+	font-size: @font-size;
+	line-height: @font-line-height;
+	padding-top: 50px;
+}
+
+.container{
+	width: 100%;
+	margin: 0 auto;
+	padding: 5px @size * 2;
+}
+.container-big{
+	width: 100%;
+	margin: 0 auto;
+	padding: 5px @size;
+}
+
+h4.list-stats{
+	margin-left: 20px;
+	width: 80%;
+	margin-bottom: 10px;
+}
+
+ul.list-stats li{
+	list-style: none;
+	margin-left: 20px;
+	width: 80%;
+}
+
+.news p{
+	margin: 30px 0px;
+}
+
+.news ul li{
+	font-size: 14px;
+	margin-left: 20px;
+}
+
+.left{
+	float: left;
+}
+
+.right{
+	float: right;
+}
+
+.clear{
+	clear: both;
+}
+.clearfix{
+	*zoom: 1;
+	&:before, &:after{
+		content: " ";
+		display: block;
+	}
+	&:after{
+		clear: both;
+	}
+}
+
+
+.bottom-content{
+	margin-top: 80px;
+}
+
+.hand{
+	cursor: pointer;
+}
+
+a{
+	text-decoration: none !important;
+	color: @color-growth;
+}
+a:hover{
+	color: darken(@color-growth, 5%);
+}
+
+.menu{
+	width: 100%;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background-color: @dark;
+	height: 50px;
+	border-bottom: 5px solid lighten(@dark, 5%);
+	z-index: 999999;
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.menu ul{
+	font-size: 18px;
+	display: inline-block;
+	
+	& a{
+		display: block;
+	}
+	& li{
+		margin: 0px 2px;
+		display: inline-block;
+		border-radius: 1px;
+
+		&.head{
+			width: 50px;
+			height: 38px;
+			margin-bottom: -14px;
+			background-image: url('../img/avatar/head_13.png');
+			background-size: cover;
+			
+		}
+	}
+}
+
+.menu-fixed{
+	position: fixed;
+	z-index: 99999999;
+	width: 100%;
+	top: 0px;
+	background-color: @color;
+	
+}
+
+
+
+.hidden{
+	display: none;
+}
+
+.dropdown{
+	display: none;
+}
+
+
+@media (max-width: 1024px) {
+	.container{
+		padding: 5px @size * 1;
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 768px) {
+	.container, .container-big{
+		padding: 5px 0px;
+		font-size: 12px;
+	}	
+}
+
+
+@media (max-width: 480px) {
+	.dropdown{
+		display: block;
+		float: right;
+		margin-right: 10px !important;
+	}
+	.menu{
+		width: 100%;
+		display: none;
+		float: left;
+	}
+	.menu ul{
+		background-image: none;
+		width: 100%;
+		text-align: left;
+		margin-top: 10px;
+		
+		& li{
+			display: inherit;
+			width: 100%;
+			
+			
+			& a{
+				width: 100%;
+				display: block;
+				margin: 3px 0px;
+			}
+		}
+	}
+	.menu-fixed{
+		width: 100%;
+		position: static;
+	}
+	
+}
