@@ -9,26 +9,21 @@ class Database extends Base{
 	public $config;
 	public $_db;
 	
-	
-	
 	function __construct() {
 		if ($this->config = parse_ini_file("config.ini")) {
-			
-		
-		
-		
-		$this->_db_host = $this->config['host'];
-		$this->_db_username = $this->config['username'];
-		$this->_db_password = $this->config['password'];
-		$this->_db_name = $this->config['name'];
-			
-		try {
-			$this->_db = new PDO('mysql:host='.$this->_db_host.';dbname='.$this->_db_name, $this->_db_username, $this->_db_password);
-			$this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-			
-		} catch (PDOException $e) {
-			$_GET['error'] = "Error: ".$e;
-		}
+
+			$this->_db_host = $this->config['host'];
+			$this->_db_username = $this->config['username'];
+			$this->_db_password = $this->config['password'];
+			$this->_db_name = $this->config['name'];
+				
+			try {
+				$this->_db = new PDO('mysql:host='.$this->_db_host.';dbname='.$this->_db_name, $this->_db_username, $this->_db_password);
+				$this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+				
+			} catch (PDOException $e) {
+				$_GET['error'] = "Error: ".$e;
+			}
 		}
 	}
 

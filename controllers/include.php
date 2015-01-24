@@ -10,8 +10,6 @@ require_once("structure.php");
 require_once("accountController.php");
 require_once("texthandler.php");
 
-
-
 $database = new Database();
 $base = new Structure();
 
