@@ -26,22 +26,12 @@ class Database extends Base{
 			$this->_db = new PDO('mysql:host='.$this->_db_host.';dbname='.$this->_db_name, $this->_db_username, $this->_db_password);
 			$this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 			
-			if (!$this->newSetup()) {
-				$this->instalDB();
-			}
-			
 		} catch (PDOException $e) {
 			$_GET['error'] = "Error: ".$e;
 		}
 		}
 	}
-	
-	private function newSetup() {
-	
-		return false;
-		
-	}
-	
+
 	public function writeIni($array) {
 	
 		$myfile = fopen("controllers/config.ini", "w") or die("Unable to open file!");
@@ -54,10 +44,6 @@ class Database extends Base{
 		}
 		
 		fclose($myfile);
-	}
-	
-	private function instalDB() {
-		
 	}
 	
 	public function arrayBinder(&$pdo, &$array) {
