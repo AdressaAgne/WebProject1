@@ -67,10 +67,10 @@ ul.list-stats li {
 }
 a {
   text-decoration: none !important;
-  color: #11aefb;
+  color: #ff8800;
 }
 a:hover {
-  color: #04a1ee;
+  color: #e67a00;
 }
 .menu {
   width: 100%;
@@ -977,7 +977,7 @@ table thead a {
   color: #f8f8f8;
 }
 table thead a:hover {
-  color: #11aefb;
+  color: #ff8800;
 }
 ul.menu-vertical {
   position: absolute;
@@ -997,9 +997,9 @@ ul.menu-vertical li {
   border-top: 1px solid #2f2f2f;
 }
 ul.menu-vertical li.active {
-  background-color: #11aefb;
-  border-bottom: 1px solid #16b0fb;
-  border-top: 1px solid #2ab7fb;
+  background-color: #ff8800;
+  border-bottom: 1px solid #ff8a05;
+  border-top: 1px solid #ff941a;
 }
 ul.menu-vertical li.active a {
   color: #f8f8f8;

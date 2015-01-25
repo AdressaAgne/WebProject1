@@ -25,6 +25,16 @@ class Admin extends Database {
 			'id'	=> 	3,
 			'name' 	=> 	'<i class="fa fa-user fa-fw"></i> Accounts',
 			'file' 	=> 	'account'
+		),
+		"/media" => array(
+			'id'	=> 	3,
+			'name' 	=> 	'<i class="fa fa-image fa-fw"></i> Media',
+			'file' 	=> 	'media'
+		),
+		"/theme" => array(
+			'id'	=> 	3,
+			'name' 	=> 	'<i class="fa fa-tint fa-fw"></i> Theme',
+			'file' 	=> 	'theme'
 		)
 	);
 
