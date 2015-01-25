@@ -16,7 +16,9 @@ $arr = array(
 $database->arrayBinder($query, $arr);
 
 	if ($query->execute()) {
-		echo(true);
+		if ($admin->newPage($database->_db->lastInsertId())) {
+			echo($database->_db->lastInsertId());
+		}
 	} else {
 		echo(false);
 	}

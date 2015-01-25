@@ -1,0 +1,42 @@
+ul.menu-vertical{
+	position: absolute;
+	width: 200px;
+	padding-top: 50px;
+	left: 0;
+	top: 0;
+	height: 100vh;
+	list-style: none;
+	background-color: @dark;
+	border-right: 1px solid darken(@dark, 10%);
+	color: @light;
+	
+	& li{
+		padding: 5px 10px;
+		border-bottom: 1px solid lighten(@dark, 1%);
+		border-top: 1px solid lighten(@dark, 5%);
+	}
+	
+	& li.active{
+		background-color: @main;
+		border-bottom: 1px solid lighten(@main, 1%);
+		border-top: 1px solid lighten(@main, 5%);
+		
+		& a{
+			color: @light;
+		}
+	}
+	
+	& li.header{
+		font-weight: bold;
+		text-align: center;
+	}
+	
+	& li:first-of-type{
+		border-top: none;
+	}
+
+}
+
+.admin-page{
+	padding-left: 205px;
+}

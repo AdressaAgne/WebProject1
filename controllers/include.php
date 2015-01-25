@@ -7,11 +7,16 @@ require_once("pdo.php");
 require_once("structure.php");
 
 //controllers
+require_once("adminController.php");
 require_once("accountController.php");
+require_once("pageController.php");
 require_once("texthandler.php");
 
 $database = new Database();
+$admin = new Admin();
 $base = new Structure();
+$static = new StaticPage();
+
 
 if (empty($database->config['host'] || empty($database->config['username'])) || empty($database->config['password']) || empty($database->config['name'])) {
 	$base->pagestructure['/']['page'] = 'instal';

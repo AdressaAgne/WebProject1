@@ -108,6 +108,14 @@ class Structure extends Base{
 		
 	}
 	
+	public function get_id() {
+		//echo
+		
+		$page = $this->_checkPage($this->_page);
+		return $this->pagestructure[$page]['id'];
+		
+	}
+	
 	public function get_grade() {
 		//echo
 		$page = $this->_checkPage($this->_page);

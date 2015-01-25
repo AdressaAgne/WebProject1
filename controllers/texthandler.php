@@ -11,4 +11,12 @@ class TextHandler {
 		return preg_replace('#('.$regex.')#iUs', $replace , $sting);
 	}
 	
+	public function shortText($text, $i, $j) {
+		if (strlen($text) > $j) {
+			return substr($text, $i, $j)."...";
+		} else {
+			return $text;
+		}
+	}
+	
 }
