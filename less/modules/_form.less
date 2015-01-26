@@ -111,6 +111,20 @@
 	}
 }
 
+.disabled{
+	opacity: .4;
+}
+
+fieldset{
+	border: none;
+	
+	&.disabled .btn:hover{
+		background-color: @light;
+		color: @dark;
+		text-shadow: none;
+	}	
+}
+
 select{
 	height: 30px;
 	margin-bottom: -2px;

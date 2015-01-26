@@ -2,10 +2,81 @@
 <div class="row align-center hidden" id="loading">
 	<span><i class="fa fa-refresh fa-spin"></i></span>
 </div>
+<div class="row">
+	<h3>New Page</h3>
+	<div class="col-4 col-tab-6">
+		<div class="form-element">
+			<label> Page url
+				<input type="text" class="negative col-12" required name="url" value="" id="url" placeholder="Url"/>
+			</label>
+		</div>
+	</div>
+	<div class="col-4 col-tab-6">
+		<div class="form-element">
+			<label> Page Title
+				<input type="text" class="negative col-12" required name="title" value="" placeholder="Title"/>
+			</label>
+		</div>
+	</div>
+	<div class="col-4 col-tab-6">
+		<div class="form-element">
+			<label> Page Header
+				<input type="text" class="negative" required name="name" value="" placeholder="Header"/>
+			</label>
+		</div>
+	</div>
+	<div class="col-4 col-tab-6">
+		<div class="form-element">
+			<label>Menus</label>
+		</div>
+		<div class="form-element inline">
+			<label class="">
+				<input type="checkbox" class="negative" checked name="menu" value="" /> Add to Menu
+			</label>
+		</div>	
+	
+		<div class="form-element inline">
+			<label class="">
+				<input type="checkbox" class="negative" name="tool" value="" /> Add to Tool Menu
+			</label>
+		</div>
+	</div>
+	<div class="col-4 col-tab-6">
+		<div class="form-element">
+			<label>Page type <small>Use dropdown for presets</small>
+				<input list="files" type="text" class="negative" required name="file" value="" placeholder="File name"/>
+			</label>
+			<datalist id="files">
+				<option value="types/blog">Blog</option>
+				<option value="types/page">Page</option>
+			</datalist>
+		</div>
+	</div>
+	<div class="col-4 col-tab-6">
+		<div class="form-element">
+			<label class="">
+				<input type="checkbox" class="negative" name="restriction" value="" /> Restricted page
+			</label>
+			<select name="grade" class="negative">
+				<option value="1">Admin Only</option>
+				<option value="2">Moderator Only</option>
+				<option value="3">User Only</option>
+				<option value="4" selected="">Everyone</option>
+			</select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-element">
+			<button class="btn negative" id="add_page"><i class="fa fa-plus"></i> Add page</button>
+		</div>
+	</div>
+
+</div>
+
 <table class="even divider hover border" id="page_table">
 	<thead>
 		<tr>
-			<td><i class="fa fa-link"></i></td>
+			<td>Page Url</td>
 			<td>Title</td>
 			<td>Name</td>
 			<td>Menu</td>
@@ -13,70 +84,25 @@
 			<td>Restr</td>
 			<td>Grade</td>
 			<td>Type</td>
-			<td colspan="2"><i class="fa fa-image"></i></td>
+			<td colspan="2"></td>
 		</tr>
 	</thead>
-	<tbody>
-		<tr>
-			<td><input type="text" class="negative col-12" required name="url" value="" id="url" placeholder="Url"/></td>
-			<td><input type="text" class="negative col-12" required name="title" value="" placeholder="Title"/></td>
-			<td><input type="text" class="negative col-12" required name="name" value="" placeholder="Name"/></td>
-			<td>
-				<div class="form-element inline">
-					<label class="">
-						<input type="checkbox" class="negative" checked name="menu" value="" />
-					</label>
-				</div>	
-			</td>
-				<td>
-				<div class="form-element inline">
-					<label class="">
-						<input type="checkbox" class="negative" name="tool" value="" />
-					</label>
-				</div>
-			</td>
-				<td>
-				<div class="form-element inline">
-					<label class="">
-						<input type="checkbox" class="negative" name="restriction" value="" />
-					</label>
-				</div>
-			</td>
-			<td>
-				<div class="form-element inline right">
-					<select name="grade" class="negative">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4" selected="">4</option>
-					</select>
-				</div>
-			</td>
-			<td>
-				<input list="files" type="text" class="negative col-12" required name="file" value="" placeholder="File name"/>
-				<datalist id="files">
-					<option value="types/blog">Blog</option>
-					<option value="types/page">Page</option>
-				</datalist>
-			</td>
-			<td><input type="text" class="negative col-12" name="image" value="" placeholder="Image"/></td>
-			<td>
-				<button class="btn negative right" id="add_page"><i class="fa fa-plus"></i></button>
-			</td>
-		</tr>
+	<tbody>		
+		<?php foreach ($base->pagestructure as $key => $value) { 
 		
-		<?php foreach ($base->pagestructure as $key => $value) { ?>
+		
+		?>
 			<tr class="page_tr" id="page_<?= $value['id'] ?>">
 				<td><a href="<?= $key ?>"><?= $key ?></a></td>
-				<td><?= $formating->shortText($value['title'], 0, 10) ?></td>
+				<td><?= $formating->shortText($value['title'], 0, 20) ?></td>
 				<td><?= $value['name'] ?></td>
-				<td><?php echo($value['menu'] == 1 ? "<i class='fa fa-check'></i>" : "<i class='fa fa-close'></i>") ?></td>
-				<td><?php echo($value['tool'] == 1 ? "<i class='fa fa-check'></i>" : "<i class='fa fa-close'></i>") ?></td>
-				<td><?php echo($value['restricted'] == 1 ? "<i class='fa fa-check'></i>" : "<i class='fa fa-close'></i>") ?></td>
-				<td><?= $value['grade'] ?></td>
-				<td><?= $value['page'] ?></td>
-				<td><?= $value['image'] ?></td>
-				<td><?php if ($key != '/' && $key != '404') { ?><button class="btn negative" id="deletepage" data-id="<?= $value['id'] ?>"><i class="fa fa-trash"></i></button><?php } ?></td>
+				<td class="align-center" width="60"><?php echo($value['menu'] == 1 ? "<i class='fa fa-check'></i>" : "<i class='fa fa-close'></i>") ?></td>
+				<td class="align-center" width="60"><?php echo($value['tool'] == 1 ? "<i class='fa fa-check'></i>" : "<i class='fa fa-close'></i>") ?></td>
+				<td class="align-center" width="60"><?php echo($value['restricted'] == 1 ? "<i class='fa fa-check'></i>" : "<i class='fa fa-close'></i>") ?></td>
+				<td class="align-center" width="60"><?= $value['grade'] ?></td>
+				<td width="120"><?= $formating->getPageTypeText($value['page']) ?></td>
+				<td width="60"><a href="/admin/edit/<?= $value['id'] ?>" style="display: block;" class="btn negative" id="edit" data-id="<?= $value['id'] ?>"><i class="fa fa-edit"></i></a></td>
+				<td width="60"><?php if ($key != '/' && $key != '404') { ?><a href="" style="display: block;" class="btn negative" id="deletepage" data-id="<?= $value['id'] ?>"><i class="fa fa-trash"></i></a><?php } ?></td>
 			</tr>
 			
 		<?php } ?>
@@ -88,6 +114,7 @@
 $(function() {
 	
 	$("[id*=deletepage]").click(function() {
+
 		var id = $(this).attr("data-id");
 		console.log(id);
 		

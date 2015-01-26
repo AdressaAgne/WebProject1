@@ -24,14 +24,15 @@ if (empty($database->config['host'] || empty($database->config['username'])) || 
 } else {
 
 	if ($database->config['setup'] == true) {
-		$query = $database->_db->prepare("CREATE TABLE `pages` (
+		$query = $database->_db->prepare("
+		
+		CREATE TABLE `pages` (
 		  `id` int(11) NOT NULL AUTO_INCREMENT,
 		  `url` varchar(255) NOT NULL,
 		  `title` varchar(255) NOT NULL,
 		  `menu` tinyint(1) NOT NULL,
 		  `tool` tinyint(1) NOT NULL,
 		  `name` varchar(255) NOT NULL,
-		  `image` varchar(255) NOT NULL,
 		  `file` varchar(255) NOT NULL,
 		  `restricted` tinyint(1) NOT NULL,
 		  `grade` int(11) NOT NULL,
@@ -39,7 +40,16 @@ if (empty($database->config['host'] || empty($database->config['username'])) || 
 		  `footer` tinyint(1) NOT NULL DEFAULT '1',
 		  PRIMARY KEY (`id`)
 		) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2;
-		INSERT INTO `pages` (`url`, `title`, `menu`, `tool`, `name`, `image`, `file`, `restricted`, `grade`, `style`, `footer`) VALUES ('/admin', 'Admin Panel', 1, 0, 'Admin', '', 'admin/admin', 0, 1, '', 1);");
+		
+		CREATE TABLE `Static_page` (
+		  `id` int(11) NOT NULL AUTO_INCREMENT,
+		  `html` text NOT NULL,
+		  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		  `page_id` int(11) NOT NULL,
+		  PRIMARY KEY (`id`)
+		) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+		
+		INSERT INTO `pages` (`url`, `title`, `menu`, `tool`, `name`, `file`, `restricted`, `grade`, `style`, `footer`) VALUES ('/admin', 'Admin Panel', 1, 0, 'Admin', 'admin/admin', 0, 1, '', 1);");
 		if ($query->execute()) {
 			
 			$ini = array(

@@ -54,4 +54,15 @@ class Admin extends Database {
 		return $query->execute();
 	}
 	
+	public function editPage($text, $id) {
+		
+		$query = $this->_db->prepare("UPDATE Static_page SET html=:html WHERE page_id = :id");
+		$arr = array(
+			'html' => $text,
+			'id' => $id
+		);
+		$this->arrayBinder($query, $arr);
+		return $query->execute();
+	}
+	
 }

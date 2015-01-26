@@ -1,6 +1,6 @@
 <?php 
 include_once("../../../controllers/include.php");
-$query = $database->_db->prepare("INSERT INTO pages (url, title, name, menu, tool, restricted, grade, image, file) VALUES (:url, :title, :name, :menu, :tool, :res, :grade, :image, :file)");
+$query = $database->_db->prepare("INSERT INTO pages (url, title, name, menu, tool, restricted, grade, file) VALUES (:url, :title, :name, :menu, :tool, :res, :grade, :file)");
 $arr = array(
 		'url' => $_POST['url'],
 		'title' => $_POST['title'],
@@ -9,7 +9,6 @@ $arr = array(
 		'tool' => $_POST['tool'],
 		'res' => $_POST['restriction'],
 		'grade' => $_POST['grade'],
-		'image' => $_POST['image'],
 		'file' => $_POST['file']
 	);
 

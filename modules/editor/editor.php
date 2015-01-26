@@ -1,83 +1,8 @@
-<?php
-include("modules/editor/editor_menu.php");
 
-$page_edit = $static->get_static_content($base->get_var(2));
-
+<?php 
+include("editor_menu.php");
 $btnSelection = $bigEditor;
-?>
-
-<div class="row">
-	<fieldset class="disabled" disabled>
-	<h3>Edit Page <small><?= $page_edit['name'] ?></small></h3>
-	<div class="col-4 col-tab-6">
-		<div class="form-element">
-			<label> Page url
-				<input type="text" class="negative col-12" required name="url" value="<?= $page_edit['url'] ?>" id="url" placeholder="Url"/>
-			</label>
-		</div>
-	</div>
-	<div class="col-4 col-tab-6">
-		<div class="form-element">
-			<label> Page Title
-				<input type="text" class="negative col-12" required name="title" value="<?= $page_edit['title'] ?>" placeholder="Title"/>
-			</label>
-		</div>
-	</div>
-	<div class="col-4 col-tab-6">
-		<div class="form-element">
-			<label> Page Header
-				<input type="text" class="negative" required name="name" value="<?= $page_edit['name'] ?>" placeholder="Header"/>
-			</label>
-		</div>
-	</div>
-	<div class="col-4 col-tab-6">
-		<div class="form-element">
-			<label>Menus</label>
-		</div>
-		<div class="form-element inline">
-			<label class="">
-				<input type="checkbox" class="negative" checked name="menu" value="" /> Add to Menu
-			</label>
-		</div>	
-	
-		<div class="form-element inline">
-			<label class="">
-				<input type="checkbox" class="negative" name="tool" value="" /> Add to Tool Menu
-			</label>
-		</div>
-	</div>
-	<div class="col-4 col-tab-6">
-		<div class="form-element">
-			<label>Page type <small>Use dropdown for presets</small>
-				<input list="files" type="text" class="negative" required name="file" value="<?= $page_edit['file'] ?>" placeholder="File name"/>
-			</label>
-			<datalist id="files">
-				<option value="types/blog">Blog</option>
-				<option value="types/page">Page</option>
-			</datalist>
-		</div>
-	</div>
-	<div class="col-4 col-tab-6">
-		<div class="form-element">
-			<label class="">
-				<input type="checkbox" class="negative" name="restriction" value="" /> Restricted page
-			</label>
-			<select name="grade" class="negative">
-				<option value="1">Admin Only</option>
-				<option value="2">Moderator Only</option>
-				<option value="3">User Only</option>
-				<option value="4" selected="">Everyone</option>
-			</select>
-		</div>
-	</div>
-	<div class="row">
-		<div class="form-element">
-			<button class="btn negative" id="add_page"><i class="fa fa-save"></i> Save</button>
-		</div>
-	</div>
-	</fieldset>
-</div>
-		
+?>			
 	<div class="row">
 		<div class="tag">
 				<ul class="comment-icons">
@@ -180,18 +105,20 @@ $btnSelection = $bigEditor;
 	</li>
 </ul>
 </div>
+	<form method="post" action="">
 		<div class="editor-body">
-			<textarea id="editor" name="html" rows="20"class="modern-textarea full" placeholder=""><?= $page_edit['html'] ?></textarea>
+			<textarea id="editor" name="html" rows="20"class="modern-textarea full" placeholder=""></textarea>
 		</div>
 	
 	
 		<div class="row">
 			<div class="col-12">
-				<button class="btn negative" type="button" id="preview-btn">Preview</button>
-				<input id="pageid" type="hidden" name="name" value="<?= $page_edit['page_id'] ?>" placeholder="User" />
-				<button id="savePageText" class="btn negative"><i class="fa fa-save"></i> Save</button>
+				<button class="btn negative right" type="button" id="preview-btn">Preview</button>
+				<input type="hidden" name="name" value="" placeholder="User" />
+				<button type="submit" class="btn negative right" name="submit">Post</button>
 			</div>
 		</div>
+		</form>
 	</div>	
 	
 	<div class="row">
@@ -228,17 +155,6 @@ $(function() {
 		updateStatusBar();
 	}
 	
-	$("#savePageText").click(function() {
-		bb = $("#editor").val();
-		id = $("#pageid").val();
-		$.ajax({
-		  type: "POST",
-		  url: "/view/admin/ajax/edit_page.php",
-		  data: { text: bb, id: id}
-		}).done(function( data ) {
-		    $("#preview").html(data);
-		  });
-	});
 	
 	$("li[data-class='style']").click(function() {
 		replaceTextBB("editor", $(this).attr("data-type"), $(this).attr("data-type"));

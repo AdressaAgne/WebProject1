@@ -1,1 +1,1 @@
-<p>New Post</p>
+<?php include("modules/editor/editor.php") ?>
