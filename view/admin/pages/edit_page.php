@@ -36,7 +36,7 @@ $btnSelection = $bigEditor;
 		</div>
 		<div class="form-element inline">
 			<label class="">
-				<input type="checkbox" class="negative" checked name="menu" value="" /> Add to Menu
+				<input type="checkbox" class="negative" <?php if ($page_edit['menu'] == 1) {echo("checked");}  ?> name="menu" value="" /> Add to Menu
 			</label>
 		</div>	
 	</div>
@@ -54,7 +54,7 @@ $btnSelection = $bigEditor;
 	<div class="col-4 col-tab-6">
 		<div class="form-element">
 			<label class="">
-				<input type="checkbox" class="negative" name="restriction" value="" /> Restricted page
+				<input type="checkbox" class="negative" <?php if ($page_edit['restricted'] == 1) {echo("checked");}  ?> name="restriction" value="" /> Restricted page
 			</label>
 			<select name="grade" class="negative">
 				<option value="1">Admin Only</option>

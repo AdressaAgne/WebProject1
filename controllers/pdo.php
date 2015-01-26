@@ -6,11 +6,14 @@ class Database extends Base{
 	protected $_db_username;
 	protected $_db_password;
 	protected $_db_name;
+	protected $ini_file = "config.ini";
 	public $config;
 	public $_db;
 	
 	function __construct() {
-		if ($this->config = parse_ini_file("config.ini")) {
+		
+	
+		if ($this->config = parse_ini_file($this->ini_file)) {
 
 			$this->_db_host = $this->config['host'];
 			$this->_db_username = $this->config['username'];
@@ -29,7 +32,7 @@ class Database extends Base{
 
 	public function writeIni($array) {
 	
-		$myfile = fopen("controllers/config.ini", "w") or die("Unable to open file!");
+		$myfile = fopen("controllers/".$this->ini_file, "w") or die("Unable to open file!");
 	
 		foreach ($array as $key => $value) {
 			
