@@ -1,4 +1,7 @@
 <?php 
+error_reporting(~0);
+ini_set('display_errors', 1);
+
 include_once("../../../controllers/include.php");
 $query = $database->_db->prepare("INSERT INTO pages (url, title, name, menu, tool, restricted, grade, file) VALUES (:url, :title, :name, :menu, :tool, :res, :grade, :file)");
 $arr = array(

@@ -48,9 +48,16 @@ class Admin extends Database {
 
 	public function newPage($id) {
 		
-		$query = $this->_db->prepare("INSERT INTO Static_page (html, page_id) VALUES (".$this->defaultPageContent.", ".$id.")");
+		$query = $this->_db->prepare("INSERT INTO Static_page (html, page_id) VALUES (:text, :id)");
+		$arr = array(
+			'text' => $this->defaultPageContent,
+			'id' => $id
+		);
+		$this->arrayBinder($query, $arr);
 		
-		return $query->execute();
+		if ($query->execute()) {
+			return true;
+		}
 	}
 	
 	public function editPage($text, $id) {

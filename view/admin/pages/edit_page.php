@@ -26,7 +26,7 @@ $btnSelection = $bigEditor;
 	<div class="col-4 col-tab-6">
 		<div class="form-element">
 			<label> Page Header
-				<input type="text" class="negative" required name="name" value="<?= $page_edit['name'] ?>" placeholder="Header"/>
+				<input type="text" class="negative" required name="page_name" value="<?= $page_edit['name'] ?>" placeholder="Header"/>
 			</label>
 		</div>
 	</div>
@@ -339,7 +339,7 @@ $(function() {
 	$("#save_settings").click(function() {
 		var url = $("[name='url']").val();
 		var title = $("[name='title']").val();
-		var name = $("[name='name']").val();
+		var name = $("[name='page_name']").val();
 		if ($("[name='menu']").is(":checked")) {
 			menu = 1;
 		} else {
@@ -365,9 +365,9 @@ $(function() {
 		  	restriction: restriction,
 		  	grade: grade,
 		  	type: file,
-		  	id: <?= $page_edit['page_id'] ?>
-		  		}
-		  }).done(function(data) {;
+		  	id: <?= $page_edit['id'] ?>
+		  }
+		  }).done(function(data) {
 		   	console.log(data);
 		  })
 		  .fail(function() {
