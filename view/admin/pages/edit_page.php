@@ -1,3 +1,4 @@
+<?php if (!empty($base->get_var(2))) { ?>
 <?php
 include("modules/editor/editor_menu.php");
 
@@ -347,3 +348,28 @@ $(function() {
 });
 
 </script>
+	
+<?php } else { ?>
+		
+		<?php foreach ($base->pagestructure as $key => $value) { 
+			if ($value['page'] == "types/page") {
+				$page_edit = $static->get_static_content($value['id']);
+		?>		
+			
+			<div class="col-4 col-tab-6 col-phone-12">
+				<div class="align-center">
+					<a href="/admin/edit/<?= $value['id'] ?>"><h3><?= $value['name'] ?> <small><?= $key ?></small></h3></a>
+				</div>
+				<div class="col-12">
+					<div class="fade">
+						<?= $formating->makeClickableLinks($page_edit['html']) ?>
+						<div class="fade-block"></div>
+					</div>
+				</div>
+			</div>	
+			
+		<?php }
+		 } ?>
+	
+	
+<?php } ?>
