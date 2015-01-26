@@ -8,7 +8,6 @@ $btnSelection = $bigEditor;
 ?>
 
 <div class="row">
-	<fieldset class="disabled" disabled>
 	<h3>Edit Page <small><?= $page_edit['name'] ?></small></h3>
 	<div class="col-4 col-tab-6">
 		<div class="form-element">
@@ -33,19 +32,13 @@ $btnSelection = $bigEditor;
 	</div>
 	<div class="col-4 col-tab-6">
 		<div class="form-element">
-			<label>Menus</label>
+			<label>Menu</label>
 		</div>
 		<div class="form-element inline">
 			<label class="">
 				<input type="checkbox" class="negative" checked name="menu" value="" /> Add to Menu
 			</label>
 		</div>	
-	
-		<div class="form-element inline">
-			<label class="">
-				<input type="checkbox" class="negative" name="tool" value="" /> Add to Tool Menu
-			</label>
-		</div>
 	</div>
 	<div class="col-4 col-tab-6">
 		<div class="form-element">
@@ -73,10 +66,9 @@ $btnSelection = $bigEditor;
 	</div>
 	<div class="row">
 		<div class="form-element">
-			<button class="btn negative" id="add_page"><i class="fa fa-save"></i> Save</button>
+			<button class="btn negative" id="save_settings"><i class="fa fa-save"></i> Save</button>
 		</div>
 	</div>
-	</fieldset>
 </div>
 		
 	<div class="row">
@@ -344,6 +336,47 @@ $(function() {
 			}
 		});
 	};
+	$("#save_settings").click(function() {
+		var url = $("[name='url']").val();
+		var title = $("[name='title']").val();
+		var name = $("[name='name']").val();
+		if ($("[name='menu']").is(":checked")) {
+			menu = 1;
+		} else {
+			menu = 0;
+		}
+		if ($("[name='restriction']").is(":checked")) {
+			restriction = 1;
+		} else {
+			restriction = 0;
+		}
+		var grade = $("[name='grade']").val();
+		var file = $("[name='file']").val();
+		
+		
+		$.ajax( {
+		  type: "POST",
+		  url: "/view/admin/ajax/edit_page_settings.php",
+		  data: {
+		  	url: url,
+		  	title: title,
+		  	name: name,
+		  	menu: menu,
+		  	restriction: restriction,
+		  	grade: grade,
+		  	type: file,
+		  	id: <?= $page_edit['page_id'] ?>
+		  		}
+		  }).done(function(data) {;
+		   	console.log(data);
+		  })
+		  .fail(function() {
+		    console.log("Failed while adding page, with error: "+data);
+		  })
+		  .always(function(data) {
+		   console.log("Request done.");
+		});
+	});
 	
 });
 

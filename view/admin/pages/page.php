@@ -27,19 +27,13 @@
 	</div>
 	<div class="col-4 col-tab-6">
 		<div class="form-element">
-			<label>Menus</label>
+			<label>Menu</label>
 		</div>
 		<div class="form-element inline">
 			<label class="">
 				<input type="checkbox" class="negative" checked name="menu" value="" /> Add to Menu
 			</label>
 		</div>	
-	
-		<div class="form-element inline">
-			<label class="">
-				<input type="checkbox" class="negative" name="tool" value="" /> Add to Tool Menu
-			</label>
-		</div>
 	</div>
 	<div class="col-4 col-tab-6">
 		<div class="form-element">
@@ -80,7 +74,6 @@
 			<td>Title</td>
 			<td>Name</td>
 			<td>Menu</td>
-			<td>Tool</td>
 			<td>Restr</td>
 			<td>Grade</td>
 			<td>Type</td>
@@ -97,12 +90,11 @@
 				<td><?= $formating->shortText($value['title'], 0, 20) ?></td>
 				<td><?= $value['name'] ?></td>
 				<td class="align-center" width="60"><?php echo($value['menu'] == 1 ? "<i class='fa fa-check'></i>" : "<i class='fa fa-close'></i>") ?></td>
-				<td class="align-center" width="60"><?php echo($value['tool'] == 1 ? "<i class='fa fa-check'></i>" : "<i class='fa fa-close'></i>") ?></td>
 				<td class="align-center" width="60"><?php echo($value['restricted'] == 1 ? "<i class='fa fa-check'></i>" : "<i class='fa fa-close'></i>") ?></td>
 				<td class="align-center" width="60"><?= $value['grade'] ?></td>
 				<td width="120"><?= $formating->getPageTypeText($value['page']) ?></td>
 				<td width="60"><a href="/admin/edit/<?= $value['id'] ?>" style="display: block;" class="btn negative" id="edit" data-id="<?= $value['id'] ?>"><i class="fa fa-edit"></i></a></td>
-				<td width="60"><?php if ($key != '/' && $key != '404') { ?><a href="" style="display: block;" class="btn negative" id="deletepage" data-id="<?= $value['id'] ?>"><i class="fa fa-trash"></i></a><?php } ?></td>
+				<td width="60"><?php if ($key != '/' && $key != '404') { ?><a href="" style="display: block;" class="btn danger" id="deletepage" data-id="<?= $value['id'] ?>"><i class="fa fa-trash"></i></a><?php } ?></td>
 			</tr>
 			
 		<?php } ?>
@@ -143,12 +135,23 @@ $(function() {
 		var url = $("[name='url']").val();
 		var title = $("[name='title']").val();
 		var name = $("[name='name']").val();
-		var menu = $("[name='menu']:checked").val();
-		var tool = $("[name='tool']").val();
-		var restriction = $("[name='restriction']").val();
+		if ($("[name='menu']").is(":checked")) {
+			menu = 1;
+		} else {
+			menu = 0;
+		}
+		if ($("[name='tool']").is(":checked")) {
+			tool = 1;
+		} else {
+			tool = 0;
+		}
+		if ($("[name='restriction']").is(":checked")) {
+			restriction = 1;
+		} else {
+			restriction = 0;
+		}
 		var grade = $("[name='grade']").val();
 		var file = $("[name='file']").val();
-		var image = $("[name='image']").val();
 		//"<i class='ball-yellow'></i>" : "<i class='ball-red'></i>"
 		$.ajax( {
 		  type: "POST",
@@ -161,8 +164,7 @@ $(function() {
 		  	tool: tool,
 		  	restriction: restriction,
 		  	grade: grade,
-		  	file: file,
-		  	image: image
+		  	file: file
 		  		}
 		  }).done(function(data) {;
 		   if (data) {
@@ -184,7 +186,7 @@ $(function() {
 		   	<td>"+restriction+"</td>\
 		   	<td>"+grade+"</td>\
 		   	<td>"+file+"</td>\
-		   	<td colspan='2'>"+image+"</td>\
+		   	<td colspan='2'></td>\
 		   </tr>");
 		   console.log(data);
 		  })

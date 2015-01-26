@@ -451,7 +451,7 @@ p {
   text-align: center;
 }
 .fade {
-  height: 400px !important;
+  height: 300px !important;
   overflow: hidden !important;
   position: relative;
 }

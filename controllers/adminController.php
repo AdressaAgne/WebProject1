@@ -2,9 +2,8 @@
 
 class Admin extends Database {
 
-	protected $_page;
-	protected $_vars;
-
+	public $defaultPageContent = "New Static Page";
+	
 	public $admin_structure = array(
 		"/pages" => array(
 			'id'	=> 	1,
@@ -49,7 +48,7 @@ class Admin extends Database {
 
 	public function newPage($id) {
 		
-		$query = $this->_db->prepare("INSERT INTO Static_page (html, page_id) VALUES ('<p>New static page</p>', ".$id.")");
+		$query = $this->_db->prepare("INSERT INTO Static_page (html, page_id) VALUES (".$this->defaultPageContent.", ".$id.")");
 		
 		return $query->execute();
 	}
@@ -63,6 +62,36 @@ class Admin extends Database {
 		);
 		$this->arrayBinder($query, $arr);
 		return $query->execute();
+	}
+	
+	public function editPageSettings($url, $title, $name, $menu, $type, $restriction, $grade, $id) {
+		
+		$query = $this->_db->prepare("
+		UPDATE pages SET 
+			url 	= :url,
+			title	= :title,
+			name	= :name,
+			menu	= :menu,
+			file	= :file,
+			restricted = :res,
+			grade	= :grade
+		WHERE id = :id");
+		
+		$arr = array(
+				'url' => $url,
+				'title' => $title,
+				'name' 	=> $name,
+				'menu' 	=> $menu,
+				'file'	=> $type,
+				'res' 	=> $restriction,
+				'grade' => $grade,
+				'id'	=> $id
+			);
+		
+		$this->arrayBinder($query, $arr);
+		
+		return $query->execute();				
+		
 	}
 	
 }
