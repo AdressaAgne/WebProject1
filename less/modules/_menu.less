@@ -7,19 +7,37 @@ ul.menu-vertical{
 	height: 100vh;
 	list-style: none;
 	background-color: @dark;
-	border-right: 1px solid darken(@dark, 10%);
 	color: @light;
+	border-right: 5px solid lighten(@dark, 5%);
 	
 	& li{
 		padding: 5px 10px;
-		border-bottom: 1px solid lighten(@dark, 1%);
+		border-bottom: 1px solid darken(@dark, 5%);
 		border-top: 1px solid lighten(@dark, 5%);
 	}
 	
 	& li.active{
-		background-color: @main;
-		border-bottom: 1px solid lighten(@main, 1%);
+		background: -webkit-linear-gradient(left, @main 0%, darken(@main, 15%) 100%);
+		background: -moz-linear-gradient(left, @main 0%, darken(@main, 15%) 100%);
+		background: -ms-linear-gradient(left, @main 0%, darken(@main, 15%) 100%);
+		background: linear-gradient(to right, @main 0%, darken(@main, 15%) 100%);
+		border-bottom: 1px solid darken(@main, 5%);
 		border-top: 1px solid lighten(@main, 5%);
+		position: relative;
+		
+		
+		
+		@arrow-size: 18px;
+		&:after{
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			border-top: @arrow-size solid rgba(0, 0, 0, 0);
+			border-right: @arrow-size solid lighten(@dark, 5%);
+			border-bottom: @arrow-size solid rgba(0, 0, 0, 0);
+			border-left: @arrow-size solid rgba(0, 0, 0, 0);
+		}
 		
 		& a{
 			color: @light;

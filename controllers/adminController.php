@@ -30,6 +30,11 @@ class Admin extends Database {
 			'name' 	=> 	'<i class="fa fa-image fa-fw"></i> Media',
 			'file' 	=> 	'media'
 		),
+		"/settings" => array(
+			'id'	=> 	3,
+			'name' 	=> 	'<i class="fa fa-cog fa-fw"></i> Settings',
+			'file' 	=> 	'theme'
+		),
 		"/theme" => array(
 			'id'	=> 	3,
 			'name' 	=> 	'<i class="fa fa-tint fa-fw"></i> Theme',
@@ -45,6 +50,7 @@ class Admin extends Database {
 		
 		return $this->_completeUrl($this->admin_structure[$var]['file']);
 	}
+	
 
 	public function newPage($id) {
 		
@@ -52,6 +58,24 @@ class Admin extends Database {
 		$arr = array(
 			'text' => $this->defaultPageContent,
 			'id' => $id
+		);
+		$this->arrayBinder($query, $arr);
+		
+		if ($query->execute()) {
+			return true;
+		}
+	}
+	
+	public function newBlogPost($id, $text, $header, $user, $tags) {
+		
+		$query = $this->_db->prepare("INSERT INTO blog (text, page_id, header, user_id, tags, permalink) VALUES (:text, :id, :header, :user, :tags, :permalink)");
+		$arr = array(
+			'text' => $text,
+			'id' => $id,
+			'header' => $header,
+			'user' => $user,
+			'tags' => $tags,
+			'permalink' => strtolower(trim(preg_replace('/[^a-zA-Z0-9]+/', '-', $header), '-'))
 		);
 		$this->arrayBinder($query, $arr);
 		

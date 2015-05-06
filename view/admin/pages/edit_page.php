@@ -385,7 +385,7 @@ $(function() {
 <?php } else { ?>
 		
 		<?php foreach ($base->pagestructure as $key => $value) { 
-			if ($value['page'] == "types/page") {
+			if ($value['page'] == "types/page" || $value['page'] == "types/blog" ) {
 				$page_edit = $static->get_static_content($value['id']);
 		?>		
 			

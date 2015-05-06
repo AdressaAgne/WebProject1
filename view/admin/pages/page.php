@@ -93,7 +93,10 @@
 				<td class="align-center" width="60"><?php echo($value['restricted'] == 1 ? "<i class='fa fa-check'></i>" : "<i class='fa fa-close'></i>") ?></td>
 				<td class="align-center" width="60"><?= $value['grade'] ?></td>
 				<td width="120"><?= $formating->getPageTypeText($value['page']) ?></td>
-				<td width="60"><a href="/admin/edit/<?= $value['id'] ?>" style="display: block;" class="btn negative" id="edit" data-id="<?= $value['id'] ?>"><i class="fa fa-edit"></i></a></td>
+				<td width="60">
+				<?php if ($formating->getPageTypeText($value['page']) != 'Custome') { ?>
+					<a href="/admin/edit/<?= $value['id'] ?>" style="display: block;" class="btn negative" id="edit" data-id="<?= $value['id'] ?>"><i class="fa fa-edit"></i></a>
+				<?php } ?></td>
 				<td width="60"><?php if ($key != '/' && $key != '404') { ?><a href="" style="display: block;" class="btn danger" id="deletepage" data-id="<?= $value['id'] ?>"><i class="fa fa-trash"></i></a><?php } ?></td>
 			</tr>
 			

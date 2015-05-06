@@ -22,7 +22,12 @@ $account = new AccountController();
 
 
 if (empty($database->config['host'] || empty($database->config['username'])) || empty($database->config['password']) || empty($database->config['name'])) {
-	$base->pagestructure['/']['page'] = 'instal';
+	$base->pagestructure['/'] = array(
+		'page' => 'instal',
+		'title' => 'Database setup',
+		'footer' => true,
+		'style' => ""
+	);
 	$base->pagestructure['404']['page'] = 'instal';
 } else {
 	
@@ -43,7 +48,7 @@ if (empty($database->config['host'] || empty($database->config['username'])) || 
 			  `style` varchar(255) NOT NULL,
 			  `footer` tinyint(1) NOT NULL DEFAULT '1',
 			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+			) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 			
 			CREATE TABLE `Static_page` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -53,14 +58,31 @@ if (empty($database->config['host'] || empty($database->config['username'])) || 
 			  PRIMARY KEY (`id`)
 			) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 			
-			INSERT INTO `pages` (`url`, `title`, `menu`, `name`, `file`, `restricted`, `grade`, `style`, `footer`) VALUES 
+			CREATE TABLE `blog` (
+			  `id` int(11) NOT NULL AUTO_INCREMENT,
+			  `page_id` int(11) NOT NULL,
+			  `text` text NOT NULL,
+			  `header` text NOT NULL,
+			  `permalink` varchar(255) NOT NULL,
+			  `user_id` int(11) NOT NULL,
+			  `tags` text NOT NULL,
+			  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			  PRIMARY KEY (`id`)
+			) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+			
+			
+			INSERT INTO `pages` 
+			(`url`, `title`, `menu`, `name`, `file`, `restricted`, `grade`, `style`, `footer`) VALUES
 			('/', 'Home', 1, 'Home', 'types/page', 0, 4, '', 1),
-			('404', '404 Page not found', 0, '404 Page not found', 'types/page', 0, 4, '', 1),
-			('/admin', 'Admin Panel', 1, 'Admin', 'admin/admin', 0, 1, '', 1);
+			('/404', '404 Page not found', 0, '404 Page not found', 'types/page', 0, 4, '', 1),
+			('/403', '403 No access', 0, '403 No access', 'types/page', 0, 4, '', 1),
+			('/admin', 'Admin Panel', 1, 'Admin', 'admin/admin', 0, 1, '', 1),
+			('/archive', 'Blog Archive', 0, 'Blog Archive', 'archive', 0, 4, '', 1);
 			
 			INSERT INTO `Static_page` (`html`, `time`, `page_id`) VALUES
-			('This is your home screen', '2015-01-26 05:47:31', 1),
-			('404 Page not found', '2015-01-26 05:47:31', 2);
+			('This is your home screen', '2015-01-26 04:47:31', 1),
+			('404 Page not found', '2015-01-26 04:47:31', 2),
+			('403 No access', '2015-01-29 08:45:42', 3);
 			
 			");
 			if ($query->execute()) {

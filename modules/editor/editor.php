@@ -105,20 +105,46 @@ $btnSelection = $bigEditor;
 	</li>
 </ul>
 </div>
-	<form method="post" action="">
+
 		<div class="editor-body">
+			<div class="form-element">
+				<div class="col-8">
+					<label>Header
+						<input type="text" class="negative" name="header" value="" placeholder="Post Header" />
+					</label>
+					
+				</div>
+				<div class="col-4">
+					<label>Blog</label>
+					<select class="negative" name="blogPage">
+						<?php foreach ($base->pagestructure as $key => $value) { 
+							if ($value['page'] === "types/blog") {
+								echo("<option value='".$value['id']."'>".$value['name']."</option>");
+							}
+						}
+						?>
+					</select>
+				</div>
+			</div>
 			<textarea id="editor" name="html" rows="20"class="modern-textarea full" placeholder=""></textarea>
+			
+			
+			<div class="form-element">
+				<label> Tags
+					<input type="text" class="negative" name="tags" value="" />
+				</label>
+			</div>
 		</div>
 	
 	
 		<div class="row">
 			<div class="col-12">
-				<button class="btn negative right" type="button" id="preview-btn">Preview</button>
-				<input type="hidden" name="name" value="" placeholder="User" />
-				<button type="submit" class="btn negative right" name="submit">Post</button>
+				<button class="btn negative" type="button" id="preview-btn">Preview</button>
+				<input type="hidden" name="user" value="" placeholder="User" />
+				<button id="PostPost" class="btn negative" name="submit">Post</button>
 			</div>
 		</div>
-		</form>
+
 	</div>	
 	
 	<div class="row">
@@ -135,6 +161,33 @@ $(function() {
 		changeText("[/"+$(this).attr("data-type")+"]");
 		updateStatusBar();
 		updatePreview();
+	});
+	
+	$("#PostPost").click(function() {
+		var header = $("[name='header']").val();
+		var user = $("[name='user']").val();
+		var html = $("[name='html']").val();
+		var page = $("[name='blogPage']").val();
+		var tags = $("[name='tags']").val();
+		$.ajax( {
+		  type: "POST",
+		  url: "/view/admin/ajax/blog_post.php",
+		  data: {
+		  	header: header,
+		  	html: html,
+		  	user: user,
+		  	id: page,
+		  	tags: tags
+			}
+		  }).done(function(data) {;
+		   console.log(data);
+		  })
+		  .fail(function() {
+		    console.log("Failed while adding page, with error: "+data);
+		  })
+		  .always(function(data) {
+		   console.log("Request done.");
+		});
 	});
 	
 	$("#preview-btn").click(function() {

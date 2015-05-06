@@ -12,7 +12,6 @@ class Database extends Base{
 	
 	function __construct() {
 		
-	
 		if ($this->config = parse_ini_file($this->ini_file)) {
 
 			$this->_db_host = $this->config['host'];
